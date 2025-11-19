@@ -123,12 +123,13 @@ class EvalEnv():
         camera_depths = self.env_config['camera_depths'],
         control_freq=self.env_config['control_freq'],                       # 20 hz control for applied actions
         fix_initial_cube_pose = self.env_config['fix_initial_cube_pose'],
+        # training=True,
         )
 
         self.dt = 1.0 / self.env.control_freq
 
 
-        ckpt_name = 'policy_best.ckpt'
+        ckpt_name = 'policy_last.ckpt'
 
         ckpt_path = os.path.join(ckpt_dir, ckpt_name)
         self.policy = self.make_policy(policy_class, policy_config)

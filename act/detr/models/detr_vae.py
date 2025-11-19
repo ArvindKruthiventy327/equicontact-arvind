@@ -58,6 +58,7 @@ class DETRVAE(nn.Module):
 
         self.is_pad_head = nn.Linear(hidden_dim, 1)
         self.query_embed = nn.Embedding(num_queries, hidden_dim)
+        
         if backbones is not None:
             self.input_proj = nn.Conv2d(backbones[0].num_channels, hidden_dim, kernel_size=1)
             self.backbones = nn.ModuleList(backbones)

@@ -75,7 +75,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--algorithm", type=str, default="ACT")
     parser.add_argument("--controller", type=str, default="config/controller/indy7_absolute_pose.json")
-    parser.add_argument("--config_file", type=str, default="config/train/ACT_stack_08.yaml")
+    parser.add_argument("--config_file", type=str, default="config/train/ACT_stack_01.yaml")
 
     args = parser.parse_args()
 

@@ -73,7 +73,7 @@ def main(args):
         target_stage = task_config['stage']
 
         padding_mask = np.zeros((max_timesteps,), dtype=bool)
-        padding_mask[:ep_len] = True
+        padding_mask[ep_len:] = True
         action_data += [action_data[-1]] * (num_queries)
 
         cubeA_pos = obs_data[0]['cubeA_pos']
@@ -153,8 +153,6 @@ def main(args):
                     state = np.concatenate((ep, eR))
 
                 states.append(state)
-
-
 
             for action_name in action_category:
                 if action_name == "world_pose":

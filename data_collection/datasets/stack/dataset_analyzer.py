@@ -12,7 +12,7 @@ from scipy.spatial.transform import Rotation as R
 def main():
     # load the dataset #1
 
-    dir = "data_collection/datasets/stack/s_GCEV_a_relative_fixed_random_noise"
+    dir = "data_collection/datasets/stack"
 
     # with open(dir, 'rb') as f:
     #     rollouts = pickle.load(f)
@@ -44,7 +44,7 @@ def main():
             rollouts = pickle.load(f)
         
         obs = rollouts['observations']
-        print(obs.keys())
+        # print(obs.keys())
         actions = rollouts['actions']
 
         action_list.append(actions)
@@ -59,18 +59,19 @@ def main():
 
     # get the mean and std of the actions
     action_list = np.array(action_list)
+    print(action_list.shape)
     action_mean = np.mean(action_list, axis=0)
     action_std = np.std(action_list, axis=0)
 
     delta_eef_list = delta_eef_list[1:]
     eef_delta = np.array(delta_eef_list)
 
-    print("eef_delta_mean", eef_delta.mean(axis=0))
-    print("eef_delta_std", eef_delta.std(axis=0))
-    print("eef_delta_sample:", eef_delta[:5,:])
+    # print("eef_delta_mean", eef_delta.mean(axis=0))
+    # print("eef_delta_std", eef_delta.std(axis=0))
+    # print("eef_delta_sample:", eef_delta[:5,:])
 
-    print("action_mean", action_mean)
-    print("action_std", action_std)
+    # print("action_mean", action_mean, action_mean.shape)
+    # print("action_std", action_std, action_std.shape)
 
 
 

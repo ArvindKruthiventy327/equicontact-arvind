@@ -16,7 +16,6 @@ from utils import load_data # data functions
 from utils import sample_box_pose, sample_insertion_pose # robot functions
 from utils import compute_dict_mean, set_seed, detach_dict # helper functions
 from policy import ACTPolicy, CNNMLPPolicy
-from visualize_episodes import save_videos
 
 # from sim_env import BOX_POSE
 
@@ -211,7 +210,7 @@ def train_bc(train_dataloader, val_dataloader, config):
             summary_string += f'{k}: {v.item():.3f} '
         print(summary_string)
 
-        if epoch % 200 == 0:
+        if epoch % 2000 == 0:
             ckpt_path = os.path.join(ckpt_dir, f'policy_epoch_{epoch}_seed_{seed}.ckpt')
             torch.save(policy.state_dict(), ckpt_path)
             plot_history(train_history, validation_history, epoch, ckpt_dir, seed)
