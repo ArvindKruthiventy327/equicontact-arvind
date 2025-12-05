@@ -12,6 +12,7 @@ macros.IMAGE_CONVENTION = "opencv"
 from robosuite.controllers import load_composite_controller_config
 
 from scripted_policy.policy_player_stack import PolicyPlayerStack
+from scripted_policy.policy_player_pih import PolicyPlayerPIH
 
 def main(args):
     # Get config
@@ -21,34 +22,52 @@ def main(args):
     task_config = config['task_parameters']
 
     # setup the environment
-    controller_config = load_composite_controller_config(robot=env_config['robots'][0], controller=env_config['controller'])
-    env = robosuite.make(
-    env_config['env_name'],
-    robots=env_config['robots'][0],
-    controller_configs=controller_config,   # arms controlled via OSC, other parts via JOINT_POSITION/JOINT_VELOCITY
-    has_renderer=False,                      # on-screen rendering
-    render_camera=None,              # visualize the "frontview" camera
-    has_offscreen_renderer=True,           # no off-screen rendering                       
-    horizon=env_config['max_iter'],                            # each episode terminates after 200 steps
-    use_object_obs=False,                   # no observations needed
-    use_camera_obs=True,
-    camera_names=env_config['camera_names'],
-    camera_heights=env_config['camera_heights'],
-    camera_widths = env_config['camera_widths'],
-    camera_depths = env_config['camera_depths'],
-    control_freq=env_config['control_freq'],                       # 20 hz control for applied actions
-    fix_initial_cube_pose = env_config['fix_initial_cube_pose'],
-    training = True,
-    )
+    
 
     save = True
 
     # setup the scripted policy
     if env_config['env_name'] == "Stack" or env_config['env_name'] == "StackCustom":
+        controller_config = load_composite_controller_config(robot=env_config['robots'][0], controller=env_config['controller'])
+        env = robosuite.make(
+        env_config['env_name'],
+        robots=env_config['robots'][0],
+        controller_configs=controller_config,   # arms controlled via OSC, other parts via JOINT_POSITION/JOINT_VELOCITY
+        has_renderer=False,                      # on-screen rendering
+        render_camera=None,              # visualize the "frontview" camera
+        has_offscreen_renderer=True,           # no off-screen rendering                       
+        horizon=env_config['max_iter'],                            # each episode terminates after 200 steps
+        use_object_obs=False,                   # no observations needed
+        use_camera_obs=True,
+        camera_names=env_config['camera_names'],
+        camera_heights=env_config['camera_heights'],
+        camera_widths = env_config['camera_widths'],
+        camera_depths = env_config['camera_depths'],
+        control_freq=env_config['control_freq'],                       # 20 hz control for applied actions
+        fix_initial_cube_pose = env_config['fix_initial_cube_pose'],
+        training = True,
+        )
         player = PolicyPlayerStack(env, render = False, randomized = True)
 
-    else:
-        pass
+    elif env_config['env_name'] == "PegInHole":
+        controller_config = load_composite_controller_config(robot=env_config['robots'][0], controller=env_config['controller'])
+        env = robosuite.make(
+        env_config['env_name'],
+        robots=env_config['robots'][0],
+        controller_configs=controller_config,   # arms controlled via OSC, other parts via JOINT_POSITION/JOINT_VELOCITY
+        has_renderer=False,                      # on-screen rendering
+        render_camera=None,              # visualize the "frontview" camera
+        has_offscreen_renderer=True,           # no off-screen rendering                       
+        horizon=env_config['max_iter'],                            # each episode terminates after 200 steps
+        use_object_obs=False,                   # no observations needed
+        use_camera_obs=True,
+        camera_names=env_config['camera_names'],
+        camera_heights=env_config['camera_heights'],
+        camera_widths = env_config['camera_widths'],
+        camera_depths = env_config['camera_depths'],
+        control_freq=env_config['control_freq'],                       # 20 hz control for applied actions
+        )
+        player = PolicyPlayerPIH(env, render=False, randomized=True)
 
     dataset_dir = task_config['raw_dataset_dir']
     num_episodes = task_config['num_episodes']

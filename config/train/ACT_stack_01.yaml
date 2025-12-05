@@ -10,13 +10,13 @@ env_parameters:
   control_freq: 20
   seed: 0
   max_iter: 1000
-  fix_initial_cube_pose: False
+  fix_initial_cube_pose: True
 
 
 task_parameters:
-  num_episodes : 50
+  num_episodes : 200
   episode_len: 250
-  raw_dataset_dir: "data_collection/datasets/stack"
+  raw_dataset_dir: "/extra_storage/data_collection/datasets/stack_fixed_pose"
   processed_dataset_dir: "data_collection/datasets/stack/s_GCEV_a_relative_random_noise_stage_0"
   ckpt_dir: "act/ckpt/stack/s_GCEV_a_relative_random_noise_stage_0"
   camera_names: ["robot0_eye_in_hand", "robot0_eye_in_hand_back"] # To be contained in the processed dataset
