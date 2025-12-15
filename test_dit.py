@@ -313,7 +313,8 @@ if __name__ == "__main__":
     # os.makedirs(video_dir, exist_ok=True)
     # video_path = f"video_{0}.mp4"
     # video_writer = imageio.get_writer(video_path, fps=20)
-    env = create_base_env("/home/blank/dl_proj/EquiContact-Simulation/config/train/DiT_stack_02.yaml")
+    
+    env = create_base_env("/home/blank/dl_proj/EquiContact-Simulation/config/train/ACT_stack_01.yaml")
     # agent = BaselinePolicy("/home/horowitz3/dit-policy/bc_finetune/test/wandb_None_equicontact_stacking_resnet_gn_nopool_2025-11-30_14-00-28", 
     #                        "test.ckpt")
     agent = BaselinePolicy("/extra_storage/wandb_None_equicontact_stacking_resnet_gn_nopool_2025-12-04_04-05-19", 
