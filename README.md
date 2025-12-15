@@ -1,3 +1,14 @@
+# Update December 14, 2025 
+I have made a few changes for my cs282 Project, but to set this up follow the directions below. All credit for the bulk of the code goes to Joohwan Seo. For processing the dataset for DiT-policy or generating the state-action dataset follow the commands below: 
+```bash
+### file to run to create the raw dataset based on the config file (use DiT_stack_01 for fixed cube poses and DiT_stack_02 for small randomized of green cube pose)
+python collect_data.py
+### file to run for creating DiT-Policy compatible dataset from the raw dataset
+python DataProcessorEquicontact.py
+### file to run for creating state-action pair dataset for our training pipeline
+python DataProcessorStateAction.py
+### check main function for cfg file path to change it for your purposes
+```
 # EquiContact-Simulation
 A repo to test G-CompACT in the simulation environment. 
 
